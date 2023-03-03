@@ -1,5 +1,6 @@
 <template>
-    <div>
-        <p>not Found</p>
-    </div>
+<div>
+    not Found
+
+    </div>    
 </template>
