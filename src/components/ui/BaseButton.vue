@@ -15,7 +15,7 @@ export default {
       required: false,
       default: null
     },
-    link: {
+    link: {// to know which should be render button or router-link
       type: Boolean,
       required: false,
       default: false

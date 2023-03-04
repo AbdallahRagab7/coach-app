@@ -2,7 +2,7 @@ export default {
   coaches(state) {
     return state.coaches;
   },
-  hasCoaches(state) { // to check if no data 
+  hasCoaches(state) {
     return state.coaches && state.coaches.length > 0;
   }
 };

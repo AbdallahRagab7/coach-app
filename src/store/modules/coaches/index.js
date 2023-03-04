@@ -3,8 +3,7 @@ import actions from './actions.js';
 import getters from './getters.js';
 
 export default {
-  namespaced: true, 
-  // make entire module locked , wmt2drsh t3ml access ly ay 7aga fi module 8er by named space 
+  namespaced: true,
   state() {
     return {
       coaches: [
