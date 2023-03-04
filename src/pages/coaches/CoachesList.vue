@@ -1,4 +1,3 @@
-
 <template>
 <div>
   <section>
@@ -8,12 +7,11 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-                  <!-- link >>>> link =true -->
-
-        <base-button link to="/register">Register as Coach</base-button>
+                                <!-- link >>>> link =true -->
+        <base-button v-if="!isCoach" link to="/register">Register as Coach</base-button>
       </div>
-        <!-- coach data can't be access by vuex because its local (using for loop)
-    so u should use props to pass it from coachList to CoachItem -->
+      <!-- coach data can't be access by vuex because its local (using for loop)
+      so u should use props to pass it from coachList to CoachItem -->
       <ul v-if="hasCoaches">
         <coach-item
           v-for="coach in filteredCoaches"
@@ -38,23 +36,26 @@ import CoachFilter from '../../components/coaches/CoachFilter.vue';
 export default {
   components: {
     CoachItem,
-    CoachFilter
+    CoachFilter,
   },
   data() {
     return {
       activeFilters: {
         frontend: true,
         backend: true,
-        career: true
-      }
+        career: true,
+      },
     };
   },
   computed: {
+    isCoach() {
+      return this.$store.getters['coaches/isCoach'];
+    },
     filteredCoaches() {
       const coaches = this.$store.getters['coaches/coaches'];
-      return coaches.filter(coach => {
+      return coaches.filter((coach) => {
         if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
-          return true;
+          return true; // filter (need true or false) false mean delete 
         }
         if (this.activeFilters.backend && coach.areas.includes('backend')) {
           return true;
@@ -72,8 +73,8 @@ export default {
   methods: {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
-    }
-  }
+    },
+  },
 };
 </script>
 

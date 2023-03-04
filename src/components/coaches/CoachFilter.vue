@@ -2,6 +2,7 @@
   <base-card>
     <h2>Find Your Coach</h2>
     <span class="filter-option">
+      <!-- checked means initially selected , @change mean checked or not  -->
       <input type="checkbox" id="frontend" checked @change="setFilter" />
       <label for="frontend">Frontend</label>
     </span>
@@ -22,6 +23,7 @@ export default {
   data() {
     return {
       filters: {
+        // true means should be shown
         frontend: true,
         backend: true,
         career: true
@@ -31,10 +33,12 @@ export default {
   methods: {
     setFilter(event) {
       const inputId = event.target.id;
-      const isActive = event.target.checked;
+      const isActive = event.target.checked; // return true or false
       const updatedFilters = {
         ...this.filters,
-        [inputId]: isActive //[anyVarible] means dynamic property 
+         // take coppy of this object then override one of these three properties
+        [inputId]: isActive 
+        //[anyVarible] means dynamic property 
       };
       this.filters = updatedFilters;
       this.$emit('change-filter', updatedFilters);

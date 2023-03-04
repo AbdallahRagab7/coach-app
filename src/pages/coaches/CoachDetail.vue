@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  props: ['id'], // dynamic paramter passed by (props:true)
+  props: ['id'],// dynamic paramter passed by (props:true)
   data() {
     return {
       selectedCoach: null,
