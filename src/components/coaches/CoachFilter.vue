@@ -39,6 +39,7 @@ export default {
          // take coppy of this object then override one of these three properties
         [inputId]: isActive 
         //[anyVarible] means dynamic property 
+        //[inputId ] >> in this.filters >> propertyName(inputId) : isActive
       };
       this.filters = updatedFilters;
       this.$emit('change-filter', updatedFilters);

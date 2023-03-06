@@ -17,7 +17,9 @@ export default {
   methods: {
     saveData(data) {
       this.$store.dispatch('coaches/registerCoach', data);
-      this.$router.replace('/coaches');
+      this.$router.replace('/coaches'); 
+      // reaplace means : go to /coaches and can't go back(to register page) again 
+      // push , u can go back 
     }
   }
 };

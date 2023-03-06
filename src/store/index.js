@@ -8,7 +8,8 @@ const store = createStore({
   },
   state() {
     return {
-      userId: 'c3'
+      userId: 'c3' // initially new coach will take this id
+      // use it to show or hide register button
     };
   },
   getters: {

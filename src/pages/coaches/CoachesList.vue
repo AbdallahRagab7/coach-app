@@ -50,6 +50,7 @@ export default {
   computed: {
     isCoach() {
       return this.$store.getters['coaches/isCoach'];
+      // return true or false , use it to hide register button
     },
     filteredCoaches() {
       const coaches = this.$store.getters['coaches/coaches'];
