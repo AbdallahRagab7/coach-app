@@ -1,5 +1,5 @@
 <template>
-<div>
-  REQUESTS
+  <div>
+    Request
   </div>
 </template>
