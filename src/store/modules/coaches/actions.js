@@ -39,7 +39,36 @@ export default {
       // id , will be use to my locally committed data here not on firebase 
       // this will be execute once all the promises are done 
     });
-  },
+  }, 
+
+  async loadCoaches(context) {
+    const response = await fetch(
+      `https://coach-app-4fbc5-default-rtdb.firebaseio.com/coaches.json`
+    );
+    // store result of promise(of fetch)
+   const responseData = await response.json()
+   // store result of promise (of json())
+
+    if (!response.ok) {
+      // ...
+    }
+
+    const coaches = [];
+
+    for (const key in responseData) {// key is each coach id 
+      const coach = {
+        id: key,
+        firstName: responseData[key].firstName,
+        lastName: responseData[key].lastName,
+        description: responseData[key].description,
+        hourlyRate: responseData[key].hourlyRate,
+        areas: responseData[key].areas
+      };
+      coaches.push(coach);
+    }
+
+    context.commit('setCoaches', coaches);
+  }
 
 
  

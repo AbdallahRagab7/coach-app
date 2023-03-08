@@ -6,13 +6,16 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline">Refresh</base-button>
-                                <!-- link >>>> link =true -->
-        <base-button v-if="!isCoach" link to="/register">Register as Coach</base-button>
+        <base-button mode="outline" @click="loadCoaches">Refresh</base-button>
+                                    <!-- link >>>> link =true -->
+        <base-button v-if="!isCoach && isLoading" link to="/register">Register as Coach</base-button>
       </div>
-      <!-- coach data can't be access by vuex because its local (using for loop)
+       <!-- coach data can't be access by vuex because its local (using for loop)
       so u should use props to pass it from coachList to CoachItem -->
-      <ul v-if="hasCoaches">
+      <div v-if="isLoading"> 
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-else-if="hasCoaches">
         <coach-item
           v-for="coach in filteredCoaches"
           :key="coach.id"
@@ -40,6 +43,7 @@ export default {
   },
   data() {
     return {
+      isLoading : false ,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -50,13 +54,13 @@ export default {
   computed: {
     isCoach() {
       return this.$store.getters['coaches/isCoach'];
-      // return true or false , use it to hide register button
+    // return true or false , use it to hide register button
     },
     filteredCoaches() {
       const coaches = this.$store.getters['coaches/coaches'];
       return coaches.filter((coach) => {
         if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
-          return true; // filter (need true or false) false mean delete 
+          return true;// filter (need true or false) false mean delete 
         }
         if (this.activeFilters.backend && coach.areas.includes('backend')) {
           return true;
@@ -67,14 +71,23 @@ export default {
         return false;
       });
     },
-    hasCoaches() {
-      return this.$store.getters['coaches/hasCoaches'];
+     hasCoaches() {
+       return !this.isLoading && this.$store.getters['coaches/hasCoaches'];
     },
+  },
+  created() {
+    this.loadCoaches();
   },
   methods: {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
+   async loadCoaches() {
+     this.isLoading = true;
+     await this.$store.dispatch('coaches/loadCoaches');
+     this.isLoading = false ; // will be false once a request is done
+
+    }
   },
 };
 </script>
