@@ -94,6 +94,7 @@ export default {
      this.isLoading = true;
      try {
        await this.$store.dispatch('coaches/loadCoaches');
+       // use await , to make isloading = false after execute this dispatch
      } catch (error) {
       this.error = error.message || 'Something went wrong'
     
