@@ -1,5 +1,12 @@
 <template>
 <div>
+  <!-- it will be rendered in body , by using teleport -->
+  <!-- if i pass :sow ="error" it will pass string  -->
+  <!-- !!error pass boolean ,, !! convert string to boolean  -->
+  <!--  we pass true if we have error , false if no have one -->
+  <base-dialog :show="!!error" title="An error occured" @close="handleError"> 
+  <p>{{ error }}</p>
+  </base-dialog>
   <section>
     <coach-filter @change-filter="setFilters"></coach-filter>
   </section>
@@ -43,6 +50,7 @@ export default {
   },
   data() {
     return {
+      error : null,
       isLoading : false ,
       activeFilters: {
         frontend: true,
@@ -84,9 +92,17 @@ export default {
     },
    async loadCoaches() {
      this.isLoading = true;
-     await this.$store.dispatch('coaches/loadCoaches');
+     try {
+       await this.$store.dispatch('coaches/loadCoaches');
+     } catch (error) {
+      this.error = error.message || 'Something went wrong'
+    
+     }
      this.isLoading = false ; // will be false once a request is done
 
+    } ,
+    handleError(){
+      this.error = null
     }
   },
 };

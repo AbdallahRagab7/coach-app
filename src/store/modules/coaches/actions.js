@@ -47,10 +47,13 @@ export default {
     );
     // store result of promise(of fetch)
    const responseData = await response.json()
+   // return data 
    // store result of promise (of json())
 
     if (!response.ok) {
-      // ...
+      const error = new error (responseData.message || 'failed to fetch')
+      throw error ; // throws a user defined exception , execution of function after throw , will stop
+      // i can handle this error in the component which dispatch this action
     }
 
     const coaches = [];
