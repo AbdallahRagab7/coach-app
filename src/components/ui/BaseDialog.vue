@@ -30,7 +30,8 @@ export default {
       type: String,
       required: false,
     },
-    fixed: {
+    fixed: { // it ensure dialog cant be dismissed (when we use spinner in it mynf34 a2flha)
+    // it will be dismessed automatically 
       type: Boolean,
       required: false,
       default: false,
