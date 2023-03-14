@@ -4,5 +4,10 @@ export default {
   } ,
   token(state){
     return state.token;
+  } ,
+  isAuthenticated(state){
+    return !!state.token;
+    // to change string to boolen
+    // if there is token = true ,, else false
   }
 };

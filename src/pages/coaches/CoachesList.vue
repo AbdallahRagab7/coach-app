@@ -16,7 +16,8 @@
         <div class="controls">
           <base-button mode="outline" @click="loadCoaches(true)">Refresh</base-button>
                                  <!-- link >>>> link =true -->
-          <base-button v-if="!isCoach && !isLoading" link to="/register">Register as Coach</base-button>
+          <base-button link to="/auth" v-if="!isLoggedIn">Login</base-button>
+          <base-button v-if=" isLoggedIn &&!isCoach && !isLoading" link to="/register">Register as Coach</base-button>
         </div>
           <!-- coach data can't be access by vuex because its local (using for loop)
       so u should use props to pass it from coachList to CoachItem -->
@@ -61,6 +62,10 @@ export default {
     };
   },
   computed: {
+    isLoggedIn(){
+    return this.$store.getters.isAuthenticated;
+    // auth module not namespaced
+    },
     isCoach() {  // return true or false , use it to hide register button
       return this.$store.getters['coaches/isCoach'];
     },
