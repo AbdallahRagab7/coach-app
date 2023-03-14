@@ -27,10 +27,14 @@ export default {
 
     context.commit('addRequest', newRequest);
   },
+
+
   async fetchRequests(context) {
    // to show request to active coach id only
     const coachId = context.rootGetters.userId;
-    const response = await fetch(`https://coach-app-4fbc5-default-rtdb.firebaseio.com/requests/${coachId}.json`);
+    const token = context.rootGetters.token;
+    const response = await fetch(`https://coach-app-4fbc5-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=`
+    +token );
     const responseData = await response.json();
 
     if (!response.ok) {

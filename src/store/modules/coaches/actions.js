@@ -10,17 +10,15 @@ export default {
       hourlyRate: data.rate,
       areas: data.areas
     };
-//await mean : store the result in response const (only be stored when fetch is done)
-    // await is like .then(response) ,, it transformend behind the scene
-    // await y3ny ht5ly el code el gwah blocking 
-    // fetch return a promise  
+  
+    const token = context.rootGetters.token; // access our rote store
     const response = await fetch(
-      `https://coach-app-4fbc5-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+      `https://coach-app-4fbc5-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=` + 
+      token,
       {
         method: 'PUT',
-         // to tell firebase that data in there will be overwritten if it existed 
+         // PUT :to tell firebase that data in there will be overwritten if it existed 
       // or will be created if not exist
-      // difference of post >>>>
       // POST : new entry would be added every time , y3ny mmken yb2a 3ndy 2 coachId c3 by data mo5tlfa 
       // i wanna have one coach entry per user
         body: JSON.stringify(coachData)
@@ -32,7 +30,6 @@ export default {
     if (!response.ok) {
       // error ...
     }
-
     context.commit('registerCoach', {
       ...coachData,
       id: userId
@@ -40,6 +37,8 @@ export default {
       // this will be execute once all the promises are done 
     });
   },
+
+
   async loadCoaches(context, payload) {
     if (!payload.forceRefresh && !context.getters.shouldUpdate) {// if it false , w2f elmethod , don't send request 
       return;

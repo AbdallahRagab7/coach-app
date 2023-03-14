@@ -4,6 +4,7 @@
     <base-dialog :show="!!error" title="An error occurred" @close="handleError">
       <p>{{ error }}</p>
     </base-dialog>
+    <!-- fixed : can't be dismissed (props in BaseDialog) , dissmissed automatic -->
     <base-dialog :show="isLoading" title="Authenticating..." fixed>
       <base-spinner></base-spinner>
     </base-dialog>
@@ -53,7 +54,8 @@ export default {
       } else {
         return 'Login instead';
       }
-    },
+    }, 
+
   },
   methods: {
     async submitForm() {
@@ -71,7 +73,10 @@ export default {
 
       try {
         if (this.mode === 'login') {
-          // ...
+      await this.$store.dispatch('login', {
+            email: this.email,
+            password: this.password,
+          });
         } else {
           await this.$store.dispatch('signup', {
             email: this.email,
