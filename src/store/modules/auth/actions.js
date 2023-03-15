@@ -106,12 +106,12 @@ export default {
       );
       throw error;
     }
-// in every reload vuex loss all data , token , so we should use local storage 
-// local storage : api built into the browser
- // + : to convert string to number , * 1000 to convert second to milliseconds
+// in every reload or enter url manual vuex loss all data , token , so we should use local storage  
+// + : to convert string to number , * 1000 to convert second to milliseconds
  // default token expires after 3600 second
-    // const expiresIn = +responseData.expiresIn * 1000;
-    const expiresIn = 5000;
+ 
+    const expiresIn = +responseData.expiresIn * 1000;
+    // const expiresIn = 5000; // for test
     const expirationDate = new Date().getTime() + expiresIn;
 
     localStorage.setItem('token', responseData.idToken);

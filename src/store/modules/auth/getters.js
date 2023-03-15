@@ -1,4 +1,3 @@
-
 export default {
   userId(state) {
     return state.userId;
@@ -8,7 +7,7 @@ export default {
   },
   isAuthenticated(state) {
     return !!state.token;
-        // to change string to boolen
+   // to change string to boolen
     // if there is token = true ,, else false
   },
   didAutoLogout(state) {
