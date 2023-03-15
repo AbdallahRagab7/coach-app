@@ -77,18 +77,25 @@ export default {
             email: this.email,
             password: this.password,
           });
+
         } else {
           await this.$store.dispatch('signup', {
             email: this.email,
             password: this.password,
           });
         }
+        // redirect : name of query paramtaer (msh sabta)
+        const redirectUrl ='/'+ (this.$route.query.redirect || 'coaches')  // access register
+        
+        this.$router.replace(redirectUrl)
+
+
       } catch (err) {
         this.error = err.message || 'Failed to authenticate, try later.';
       }
 
       this.isLoading = false;
-    },
+    }, 
     switchAuthMode() {
       if (this.mode === 'login') {
         this.mode = 'signup';
