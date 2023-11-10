@@ -8,8 +8,7 @@
 
 
 ## About <a name = "about"></a>
-- The Coach Finder App is an Web App which should help us find a coach that, for example,
-helps us become better in web development, whatever.
+Coach Finder app is facilitating the listing and filtration of available coaches who have registered with our platform . Key functionalities include the ability to view coach details, register as a coach, and establish direct communication with coaches , coach able to respond to incoming message request .
 
 ## website description <a name = "website-description"></a>
 
